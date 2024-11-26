@@ -1,0 +1,99 @@
+.TodoListItem{
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    &:nth-child(even){
+        background: #f8f9fa;
+
+    }
+    .checkbox{
+        cursor: pointer;
+        flex: 1;
+        display: flex;
+        align-items: center;
+        svg{
+            font-size: 1.5rem;
+        }
+        .text{
+            margin-left: 0.5rem;
+            flex: 1;
+        }
+        &.checked{
+            svg{
+                color: #22b8cf;
+            }
+            .text{
+                color: #adb5bd;
+                text-decoration: line-through;
+            }
+        }
+    
+    }
+    .modify{
+        display: flex;
+        align-items: center;
+        font-size: 1.5rem;
+        color: #5aa8e7;
+        cursor: pointer;
+        &:hover{
+            color: #76bbf4;
+
+        }
+    }
+    .remove{
+        display: flex;
+        align-items: center;
+        font-size: 1.5rem;
+        color: #ff6b6b;
+        cursor: pointer;
+        &:hover{
+            color: #ff8787;
+
+        }
+    }
+    input{
+        background: none;
+        outline: none;
+        border: 1;
+        padding: 0.5rem;
+        font-size: 1rem;
+        line-height: 1;
+        margin-right: 0.5rem;
+        color: rgb(0, 0, 0);
+        &::placeholder{
+            color: #dee2de;
+        }
+        flex: 1;
+
+    }
+    .editButton{
+        display: flex;
+        align-items: center;
+        font-size: 1.5rem;
+        color: #5aa8e7;
+        cursor: pointer;
+        &:hover{
+            color: #76bbf4;
+
+        }
+
+
+
+    }
+    .editButtons {
+        display: flex;
+        gap: 0.5rem; /* 버튼 간의 간격 */
+        margin-left: auto; /* 오른쪽으로 정렬 */
+    }
+    .editMode {
+        display: flex;
+        align-items: center;
+        justify-content: space-between; /* 입력 필드와 버튼 그룹 간의 공간 확보 */
+        width: 100%;
+    }
+
+    &+&{
+        border-top: 1px solid #dee2e6;
+    }
+
+}
