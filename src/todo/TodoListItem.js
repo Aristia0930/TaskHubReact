@@ -4,7 +4,7 @@ import { MdCheckBoxOutlineBlank,MdCheckBox,MdRemoveCircleOutline,MdOutlineCancel
 import { FiEdit3 } from "react-icons/fi";
 import '.././style/TodoListItem.scss'
 
-const TodoListItem = ({todo,onRemove,onToggle,modify}) => {
+const TodoListItem = ({todo,onRemove,onToggle,modify,style}) => {
     const {id,text,checked}=todo;
     const [isEditing, setIsEditing] = useState(false);
     const [editedText, setEditedText] = useState(text);
@@ -14,6 +14,7 @@ const TodoListItem = ({todo,onRemove,onToggle,modify}) => {
       };
   
     return (
+        <div className='TodoListItem-virtualized' style={style}>
         <div className='TodoListItem'>
             {isEditing ?(
                 <div className='editMode'>
@@ -44,8 +45,8 @@ const TodoListItem = ({todo,onRemove,onToggle,modify}) => {
             </div>
             </>)}
             
-        </div>
+        </div></div>
     );
 };
 
-export default TodoListItem;
+export default React.memo(TodoListItem);

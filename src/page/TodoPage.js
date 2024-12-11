@@ -1,9 +1,9 @@
-import TodoTemplate from './todo/TodoTemplate';
-import TodoInsert from './todo/TodoInsert';
-import TodoList from './todo/TodoList';
+import TodoTemplate from '.././todo/TodoTemplate';
+import TodoInsert from '.././todo/TodoInsert';
+import TodoList from '.././todo/TodoList';
 import { useCallback, useRef, useState } from 'react';
 
-function App() {
+function TodoPage() {
   const [todos,setTodos]=useState([
     {
       id:1,
@@ -58,4 +58,4 @@ function App() {
   );
 } 
 
-export default App;
+export default TodoPage;
