@@ -2,11 +2,16 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../style/LoginPage.scss'
 import axios from '../../node_modules/axios/index';
+import { useSelector, useDispatch } from 'react-redux';
+import { success } from '../slices/loginState'
 
 const LoginPage = () => {
     const [userId, setUserId] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
+    const apiUrl = process.env.REACT_APP_API_URL;
+    const isLoggedIn = useSelector((state) => state.loginState.user);
+    const dispatch = useDispatch();
     const joinPage=()=>{
         navigate('/join')
     }
@@ -20,11 +25,11 @@ const LoginPage = () => {
         data.append('password',password)
         try {
             // 로그인 요청
-            const response = await axios.post('http://localhost:8080/login',data, { withCredentials: true });
+            const response = await axios.post(`${apiUrl}/login`,data, { withCredentials: true });
       
 
             if (response.status===200){
-                alert("로그인성공")
+                dispatch(success())
                 console.log(response.data.authorities)
                 navigate('/')
 

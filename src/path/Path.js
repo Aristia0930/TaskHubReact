@@ -6,13 +6,16 @@ import AboutMe from '../page/AboutMe';
 import Head from '../page/Head';
 import LoginPage from '../page/LoginPage';
 import SignUpPage from '../page/SignUpPage';
+import MessageCreatePage from '../page/MessageCreatePage';
+import MessagePage from '../page/MessagePage';
+import Sidebar from '../page/Sidebar';
 const Path = () => {
-    const data={
-        velopert:{
-            name:'김민준',
-            description:"리액트"
-        }
-    }
+    // const data={
+    //     velopert:{
+    //         name:'김씨',
+    //         description:"리액트"
+    //     }
+    // }
 
     return (
 
@@ -21,10 +24,15 @@ const Path = () => {
                 <Route path="/" element={<Home/>} />
             
                 <Route path="/TodoPage" element={<TodoPage/>} />
-                <Route path="/profiles/:username" element={<AboutMe data={data}/>} />
+                {/* <Route path="/profiles/:username" element={<AboutMe data={data}/>} /> */}
+                <Route path="/login" element={<LoginPage/>}/>
+                <Route path="/join" element={<SignUpPage/>}/>
+                <Route element={<Sidebar/>}>
+                    <Route path="/message" element={<MessagePage/>}/>
+                    <Route path="/message/send" element={<MessageCreatePage/>}/>
+                </Route>
             </Route>
-            <Route path="/login" element={<LoginPage/>}/>
-            <Route path="/join" element={<SignUpPage/>}/>
+
         </Routes>
 
     );
