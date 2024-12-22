@@ -46,16 +46,16 @@ $transition-time: 0.3s;
       li {
         margin: 0 15px;
 
-        a {
+         
           color: $text-color;
           text-decoration: none;
           font-size: 16px;
           transition: color $transition-time;
 
           &:hover {
-            color: $hover-color;
+            color: #d4de97
           }
-        }
+        
       }
     }
 
@@ -75,6 +75,8 @@ $transition-time: 0.3s;
 
         &:hover {
           background-color: darken($primary-color, 10%);
+       
+          
         }
       }
     }
@@ -82,7 +84,7 @@ $transition-time: 0.3s;
 }
 
 // 메인 컨텐츠 스타일
-.main-content {
+.maincontent {
   flex: 1; /* 본문이 푸터를 밀어냄 */
-  padding: 20px; /* 적절한 여백 추가 */
+  // padding: 20px; /* 적절한 여백 추가 */
 }

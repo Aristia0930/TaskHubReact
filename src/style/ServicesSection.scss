@@ -1,0 +1,41 @@
+.services-section {
+    padding: 2rem;
+    text-align: center;
+  
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+  
+    .services {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+  
+      .service-card {
+        background: #007bff;
+        color: white;
+        text-decoration: none;
+        padding: 1.5rem;
+        border-radius: 8px;
+        width: 200px;
+        text-align: center;
+        transition: transform 0.3s ease;
+  
+        h3 {
+          font-size: 1.5rem;
+        }
+  
+        p {
+          font-size: 1rem;
+          margin-top: 0.5rem;
+        }
+  
+        &:hover {
+          transform: translateY(-5px);
+          background: #0056b3;
+        }
+      }
+    }
+  }
+  

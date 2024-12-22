@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import MessageItem from '../compents/MessageItem';
+import MessageItem from '../components/MessageItem';
 import '../style/Message.scss'
 import { useNavigate } from 'react-router-dom';
 

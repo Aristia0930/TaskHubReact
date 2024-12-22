@@ -1,0 +1,71 @@
+
+
+.history-page {
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .history-header {
+    text-align: center;
+    margin-bottom: 30px;
+  
+    h1 {
+      font-size: 36px;
+      color: #333;
+    }
+  
+    h2 {
+      font-size: 28px;
+      color: #555;
+    }
+  
+    h3 {
+      font-size: 20px;
+      color: #888;
+      margin-top: 10px;
+    }
+  }
+  
+  .history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 50%;
+    margin: auto;
+ 
+  }
+  
+  .history-item {
+
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 가운데 정렬 */
+    gap: 10px; /* 날짜와 내용 사이 간격 */
+    padding: 10px 20px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  
+    &:hover {
+      background-color: #f0f0f0;
+    }
+  
+    .history-date {
+      font-size: 16px;
+      color: #555;
+      font-weight: bold;
+    }
+  
+    .history-divider {
+      font-size: 16px;
+      color: #aaa;
+    }
+  
+    .history-content {
+      font-size: 14px;
+      color: #666;
+    }
+  }
+  

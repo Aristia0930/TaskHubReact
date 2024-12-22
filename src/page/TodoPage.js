@@ -104,7 +104,7 @@ function TodoPage() {
 
 
   return (
-    <div className="App">
+    <div className="main-content">
         <div className='todoDiv'>
         <TodoTemplate>
           <TodoInsert onInsert={onInsert}/>

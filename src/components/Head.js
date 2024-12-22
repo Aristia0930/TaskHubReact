@@ -31,7 +31,7 @@ const Head = () => {
         catch(error){
             console.log(error)
             dispatch(fail())
-            navigate('/')
+            // navigate('/')
         }
     }
     check()
@@ -58,16 +58,32 @@ const Head = () => {
   };
 
 
+  const todoButton=()=>{
+    if(isLoggedIn){
+        navigate('/TodoPage')
+    }
+}
+
+const messageButton=()=>{
+    if(isLoggedIn){
+        navigate('/message')
+    }
+}
+
+
   return (
     <div className='layout'>
       <header className="header">
         <div className="logo">
-          <a href="/">MyWebsite</a>
+          <a href="/">TaskHub</a>
         </div>
         <nav className="nav">
           <ul className="nav-links">
-            <li><Link to="/">Home</Link></li>
-            {/* <li><Link to="/">공지사항</Link></li> */}
+            <li onClick={()=>{navigate("/")}}>Home</li>
+            {/* <li><Link to="/">Notices</Link></li> */}
+            <li onClick={()=>{navigate("/hisorypage")}}>Update History</li>
+            <li onClick={todoButton}>Todo</li>
+            <li onClick={messageButton}>Message</li>
             {/* <li><a href="/about">About</a></li>
             <li><a href="/services">Services</a></li>
             <li><a href="/contact">Contact</a></li> */}
@@ -81,7 +97,7 @@ const Head = () => {
           </div>
         </nav>
       </header>
-      <main className="main-content">
+      <main className="maincontent">
         <Outlet />
       </main>
       <Footer/>
