@@ -6,6 +6,7 @@ import { success, fail } from '../slices/loginState'
 import {Link} from 'react-router-dom';
 import axios from '../../node_modules/axios/index';
 import '../style/Head.scss'
+import Footer from './Footer'
 
 const Head = () => {
     const apiUrl = process.env.REACT_APP_API_URL;
@@ -30,6 +31,7 @@ const Head = () => {
         catch(error){
             console.log(error)
             dispatch(fail())
+            navigate('/')
         }
     }
     check()
@@ -57,7 +59,7 @@ const Head = () => {
 
 
   return (
-    <div>
+    <div className='layout'>
       <header className="header">
         <div className="logo">
           <a href="/">MyWebsite</a>
@@ -65,6 +67,7 @@ const Head = () => {
         <nav className="nav">
           <ul className="nav-links">
             <li><Link to="/">Home</Link></li>
+            {/* <li><Link to="/">공지사항</Link></li> */}
             {/* <li><a href="/about">About</a></li>
             <li><a href="/services">Services</a></li>
             <li><a href="/contact">Contact</a></li> */}
@@ -81,6 +84,7 @@ const Head = () => {
       <main className="main-content">
         <Outlet />
       </main>
+      <Footer/>
     </div>
   );
 };

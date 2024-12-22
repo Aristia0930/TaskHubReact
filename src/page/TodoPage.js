@@ -1,7 +1,7 @@
 import TodoTemplate from '.././todo/TodoTemplate';
 import TodoInsert from '.././todo/TodoInsert';
 import TodoList from '.././todo/TodoList';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import axios from '../../node_modules/axios/index';
 import { useNavigate } from 'react-router-dom';
 
@@ -105,13 +105,14 @@ function TodoPage() {
 
   return (
     <div className="App">
-      <TodoTemplate>
-        <TodoInsert onInsert={onInsert}/>
-        <TodoList todos={todos} onRemove={onRemove} onToggle={onToggle} modify={modify}/>
-    
+        <div className='todoDiv'>
+        <TodoTemplate>
+          <TodoInsert onInsert={onInsert}/>
+          <TodoList todos={todos} onRemove={onRemove} onToggle={onToggle} modify={modify}/>
       
-      </TodoTemplate>
-
+        
+        </TodoTemplate>
+      </div>
     </div>
   );
 } 

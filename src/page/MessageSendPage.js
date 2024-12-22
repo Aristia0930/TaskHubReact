@@ -10,16 +10,17 @@ function MessagePage() {
   const apiUrl = process.env.REACT_APP_API_URL;
    const navigate = useNavigate();
 
-  const fetchMessages = async () => {
+
+
+  const myMessages = async () => {
     try {
-      const response = await axios.get(`${apiUrl}/message/box`,{ withCredentials: true });
+      const response = await axios.get(`${apiUrl}/message/mysend`,{ withCredentials: true });
       setMessages(response.data);
     } catch (error) {
       console.error('메시지 가져오기 실패', error);
       navigate('/')
     }
   };
-
 
   const deleteMessage = async (id) => {
     try{
@@ -32,12 +33,13 @@ function MessagePage() {
       navigate('/')
     }
 
-    fetchMessages()
+    myMessages()
   };
 
   useEffect(() => {
+      myMessages()
+ 
 
-    fetchMessages();
 
   }, [apiUrl]);
 
@@ -45,10 +47,10 @@ function MessagePage() {
     <div className="message-list">
       {messages.length > 0 ? (
         messages.map((message) => (
-          <MessageItem key={message.id} message={message} deleteMessage={deleteMessage} send={true} />
+          <MessageItem key={message.id} message={message} deleteMessage={deleteMessage} send={false}/>
         ))
       ) : (
-        <p>받은 메시지가 없습니다.</p>
+        <p>보낸메세지가 없습니다.</p>
       )}
     </div>
   );

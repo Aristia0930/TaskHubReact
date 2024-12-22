@@ -5,6 +5,11 @@ $text-color: white;
 $hover-color: lighten($primary-color, 10%);
 $transition-time: 0.3s;
 
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
 // 헤더 스타일
 .header {
   display: flex;
@@ -78,5 +83,6 @@ $transition-time: 0.3s;
 
 // 메인 컨텐츠 스타일
 .main-content {
-  padding: 20px;
+  flex: 1; /* 본문이 푸터를 밀어냄 */
+  padding: 20px; /* 적절한 여백 추가 */
 }

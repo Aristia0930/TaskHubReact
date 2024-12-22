@@ -44,15 +44,21 @@ const Home = () => {
         }
     }
 
+    const messageButton=()=>{
+        if(userData){
+            navigate('/message')
+        }
+    }
+
     return (
         <div>
             <h1>홈</h1>
             <button onClick={todoButton}>todo</button>
-            <button onClick={todoButton}>message</button>
+            <button onClick={messageButton}>message</button>
             <br></br>
             {/* <Link to="/profiles/non?detail=1"  state={{ username: "john_doe", age: 25 }}>존재하지 않는 사람</Link> */}
             
-            <Link to="/message"  >메세지지</Link> 
+        
             <hr></hr>
 
             {userData ?<h1>로그아웃</h1>:<Link to="/login">로그인</Link> }
