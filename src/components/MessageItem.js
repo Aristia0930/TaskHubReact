@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-function MessageItem({ message, deleteMessage ,send}) {
+function MessageItem({ message, deleteMessage ,send,checkMessage}) {
   return (
     <article className="message-item">
       <header className="message-header">
@@ -14,9 +14,17 @@ function MessageItem({ message, deleteMessage ,send}) {
         <p>{message.content}</p>
       </section>
       <footer className="message-actions">
-        <button className="delete-button" onClick={() => deleteMessage(message.message_id)}>
+      {send ?       
+        <>
+        <button className="delete-button" onClick={() => deleteMessage(message.messageId)}>
           삭제
-        </button>
+        </button></> : 
+            <>
+            <button className="delete-button" onClick={() => checkMessage(message.messageId)}>
+              삭제
+            </button></>
+            }
+
       </footer>
     </article>
   );

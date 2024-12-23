@@ -36,6 +36,20 @@ function MessagePage() {
     myMessages()
   };
 
+  const checkMessage = async (id) => {
+    try{
+      const rs=await axios.put(`${apiUrl}/message/remove/${id}`,{},{ withCredentials: true })
+      if(rs.status===200){
+        console.log("todo삭제완료")
+      }
+    }catch(error){
+      console.log(error)
+      navigate('/')
+    }
+
+    myMessages()
+  };
+
   useEffect(() => {
       myMessages()
  
@@ -47,7 +61,7 @@ function MessagePage() {
     <div className="message-list">
       {messages.length > 0 ? (
         messages.map((message) => (
-          <MessageItem key={message.id} message={message} deleteMessage={deleteMessage} send={false}/>
+          <MessageItem key={message.id} message={message} deleteMessage={deleteMessage} send={false} checkMessage={checkMessage}/>
         ))
       ) : (
         <p>보낸메세지가 없습니다.</p>
