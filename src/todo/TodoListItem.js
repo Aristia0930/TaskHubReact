@@ -23,11 +23,11 @@ const TodoListItem = ({todo,onRemove,onToggle,modify,style}) => {
                             value={editedText}
                             onChange={(e) => setEditedText(e.target.value)}
                         />
-                        <div className='editButtons'>
+
                         <div className='editButton' onClick={handleModify}><MdOutlineCheckBox/></div>
-                        <div className='editButton' onClick={() => setIsEditing(false)}><MdOutlineCancel/> </div>
+                        <div className='remove' onClick={() => setIsEditing(false)}><MdOutlineCancel/> </div>
                         </div>
-                        </div>
+                
             ):
 
            ( <>

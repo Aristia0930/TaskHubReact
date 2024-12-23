@@ -1,34 +1,76 @@
-.todoDiv{
-    width: 518px;
-    background-color: #b9e8f0;
-    margin-right: auto;
-    margin-left: auto;
+// .todoDiv{
+//     width: 518px;
+//     background-color: #b9e8f0;
+//     margin-right: auto;
+//     margin-left: auto;
 
     
-    height: 627px;
-    border-radius: 4px;
-}
+//     height: 645px;
+//     border-radius: 4px;
+// }
 
-.TodoTemplate {
-    width: 512px;
-    margin-right: auto;
-    margin-left: auto;
-    padding-top: 3px;
-    border-radius: 4px;
-    overflow: hidden;
+// .TodoTemplate {
+//     width: 512px;
+//     margin-right: auto;
+//     margin-left: auto;
+//     padding-top: 3px;
+//     border-radius: 4px;
+//     overflow: hidden;
+
+//     .app-title {
+//         background: #22b8cf;
+//         color: white;
+//         height: 4rem;
+//         font-size: 1.5rem;
+//         display: flex;
+//         align-items: center;
+//         justify-content: center;
+
+//     }
+
+//     .content {
+//         background: rgb(211, 211, 211);
+//     }
+// }
+.main-content-todo{
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #ffffff;
+    overflow-y: auto;
+    min-height: 100vh;
+  
+
+}
+.todoDiv {
+    width: 90%; /* 반응형 너비 */
+    max-width: 522px;
+    margin: 0 auto;
+
+
+    border-radius: 12px; 
+    // 그림자를 추가하여 떠 있는 효과를 만듭니다
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff; // 더 나은 대비를 위해 흰색으로 변경
 
     .app-title {
-        background: #22b8cf;
+        background: linear-gradient(to right, #22b8cf, #6eb9d2);
         color: white;
-        height: 4rem;
-        font-size: 1.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
+        padding: 20px;
+        font-size: 2rem;
+        font-weight: bold;
+        text-align: center;
+        border-radius: 4px 4px 0px 0px; 
     }
 
     .content {
-        background: rgb(211, 211, 211);
+        background: #e8e8e8;
+        // padding: 20px;
+        border-top-left-radius: 0; // 모서리 둥글게
+        border-top-right-radius: 0; // 모서리 둥글게
+    }
+
+    // 향후 상호작용 요소에 대한 호버 효과
+    .content:hover {
+        background-color: #d3d3d3; // 호버 시 약간 더 어두운 회색
     }
 }

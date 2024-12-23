@@ -1,10 +1,11 @@
 .TodoListItem-virtualized{
 
+    background-color: #f8f9fa;
     &+&{
         border-top: 1px solid #dee2e6;
     }
     &:nth-child(even){
-        background: #f8f9fa;
+        background: #c4cfd3;
     }
 
 }
@@ -34,7 +35,7 @@
                 color: #22b8cf;
             }
             .text{
-                color: #adb5bd;
+                color: #46484a;
                 text-decoration: line-through;
             }
         }
@@ -62,21 +63,21 @@
 
         }
     }
-    input{
-        background: none;
-        outline: none;
-        border: 1;
-        padding: 0.5rem;
-        font-size: 1rem;
-        line-height: 1;
-        margin-right: 0.5rem;
-        color: rgb(0, 0, 0);
-        &::placeholder{
-            color: #dee2de;
+    input {
+        background-color: #e9ecef; /* 배경 색상 */
+        outline: none; /* 아웃라인 제거 */
+        border: 1px solid #ced4da; /* 테두리 설정 */
+        border-radius: 5px; /* 모서리 둥글게 */
+        padding: 0.5rem; /* 패딩 설정 */
+        font-size: 1rem; /* 폰트 크기 */
+        margin-right: 0.5rem; /* 우측 여백 */
+        
+        &::placeholder {
+            color: #adb5bd; /* 플레이스홀더 색상 */
         }
         flex: 1;
-
     }
+
     .editButton{
         display: flex;
         align-items: center;

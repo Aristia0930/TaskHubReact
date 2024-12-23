@@ -1,38 +1,84 @@
+// .TodoInsert {
+//     display: flex;
+//     background: #495057;
+
+//     input{
+//         background: none;
+//         outline: none;
+//         border: none;
+//         padding: 0.5rem;
+//         font-size: 1.125rem;
+//         line-height: 1.5;
+//         color: wheat;
+//         &::placeholder{
+//             color: #dee2de;
+//         }
+//         flex: 1;
+
+//     }
+
+
+//     button{
+//         background: none;
+//         outline:none;
+//         border: none;
+//         background: #868e96;
+//         color: white;
+//         padding-left: 1rem;
+//         padding-right: 1rem;
+//         font-size: 1.5rem;
+//         display: flex;
+//         align-items: center;
+//         cursor: pointer;
+//         transition: 0.1s background ease-in;
+//         &:hover{
+//             background: #adb5bd;
+//         }
+//     }
+// }
+
 .TodoInsert {
     display: flex;
     background: #495057;
 
-    input{
-        background: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // 부드러운 그림자
+    padding: 0.5rem; // 컴포넌트 주변 여백 추가
+
+    input {
+        background: #343a40; // 부드러운 배경
         outline: none;
         border: none;
         padding: 0.5rem;
         font-size: 1.125rem;
         line-height: 1.5;
         color: wheat;
-        &::placeholder{
+        border-radius: 5px; // 입력란 모서리 둥글게
+
+        &::placeholder {
             color: #dee2de;
         }
         flex: 1;
+        transition: background 0.2s ease-in-out; // 부드러운 배경 전환
 
+        &:focus {
+            background: #495057; // 포커스 시 진해짐
+        }
     }
 
-
-    button{
-        background: none;
-        outline:none;
-        border: none;
+    button {
         background: #868e96;
-        color: white;
-        padding-left: 1rem;
-        padding-right: 1rem;
+        outline: none;
+        border: none;
+        padding: 0.7rem 1.5rem; // 버튼 주변 여백 추가
         font-size: 1.5rem;
         display: flex;
         align-items: center;
         cursor: pointer;
-        transition: 0.1s background ease-in;
-        &:hover{
+        transition: background 0.2s ease-in-out, transform 0.1s; // 전환 효과 추가
+        
+        &:hover {
             background: #adb5bd;
+            transform: scale(1.05); // 호버 시 버튼 확대
         }
     }
 }
