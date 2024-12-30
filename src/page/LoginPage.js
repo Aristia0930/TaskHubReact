@@ -26,7 +26,7 @@ const LoginPage = () => {
         try {
             // 로그인 요청
             const response = await axios.post(`${apiUrl}/login`,data, { withCredentials: true });
-      
+
 
             if (response.status===200){
                 dispatch(success())
@@ -37,6 +37,7 @@ const LoginPage = () => {
             // 로그인 성공 시 처리 (예: 대시보드로 리다이렉트)
           } catch (error) {
             console.error("로그인 실패:", error);
+            alert("아이디 비번을 확인해주세요")
           }
         };
         

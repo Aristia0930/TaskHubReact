@@ -25,6 +25,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "proxy": "https://port-0-taskhubspring-m5al105w4c7a25c2.sel4.cloudtype.app",
   "eslintConfig": {
     "extends": [
       "react-app",
