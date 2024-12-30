@@ -4,7 +4,7 @@ module.exports = function (app) {
     app.use(
         '/api',
         createProxyMiddleware({
-            target: 'http://localhost:8080',
+            target: 'https://port-0-taskhubspring-m5al105w4c7a25c2.sel4.cloudtype.app',
             changeOrigin: true,
         })
     );
