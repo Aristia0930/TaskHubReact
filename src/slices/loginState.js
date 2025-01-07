@@ -1,7 +1,8 @@
 import {createSlice} from '@reduxjs/toolkit'
 
 const initialState={
-    user:false
+    user:false,
+    role:""
 }
 
 const loginState=createSlice({
@@ -10,13 +11,19 @@ const loginState=createSlice({
     reducers :{
         success:(state)=>{
             state.user=true
+            state.role="user"
         },
         fail:(state)=>{
             state.user=false
-        }
+        },
+        adminsuccess:(state)=>{
+            state.user=true
+            state.role="admin"
+        },
+
     },
 })
 
 
-export const { success, fail } = loginState.actions;
+export const { success, fail,adminsuccess } = loginState.actions;
 export default loginState.reducer;

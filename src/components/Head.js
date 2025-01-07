@@ -2,15 +2,18 @@ import React, { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { success, fail } from '../slices/loginState'
+import { success, fail,adminsuccess } from '../slices/loginState'
 import {Link} from 'react-router-dom';
 import axios from '../../node_modules/axios/index';
 import '../style/Head.scss'
 import Footer from './Footer'
+import Profile from './Profile';
+
 
 const Head = () => {
     const apiUrl = process.env.REACT_APP_API_URL;
     const isLoggedIn = useSelector((state) => state.loginState.user);
+    const isRole = useSelector((state) => state.loginState.role);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -21,7 +24,12 @@ const Head = () => {
 
             if (rs.status===200){
                 if(rs.data.authorities!==null){
+                  if(rs.data.authorities==="ROLE_USER"){
                     dispatch(success())
+                  }
+                  else if(rs.data.authorities==="ROLE_ADMIN"){
+                    dispatch(adminsuccess())
+                  }
                 }
                 
                 console.log(rs.data.authorities)
@@ -90,7 +98,11 @@ const messageButton=()=>{
           </ul>
           <div className="auth-buttons">
             {isLoggedIn ? (
-              <button onClick={handleLogout} className="logout-button">Logout</button>
+              // isRole==="admin" ? (<button onClick={handleLogout} className="logout-button">어드민</button>) :
+              //   (<button onClick={handleLogout} className="logout-button">Logout</button>)
+                // <img src='/profile_40x40.png'/>
+                <Profile role={isRole} imageSrc="/profile_40x40.png" />
+
             ) : (
               <button onClick={handleLogin} className="login-button">Login</button>
             )}

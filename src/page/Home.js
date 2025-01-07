@@ -54,9 +54,9 @@ const Home = () => {
         }
     }
 
-    useEffect(()=>{
-        check()
-    },[])
+    // useEffect(()=>{
+    //     check()
+    // },[])
     return (
         <div className='home'>
 

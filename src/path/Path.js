@@ -11,6 +11,7 @@ import MessagePage from '../page/MessagePage';
 import Sidebar from '../components/Sidebar';
 import MessageSendPage from '../page/MessageSendPage';
 import UpdateHistoryPage from '../page/UpdateHistoryPage';
+import ProfilePage from '../page/ProfilePage';
 
 const Path = () => {
     // const data={
@@ -32,6 +33,7 @@ const Path = () => {
                     <Route path="/login" element={<LoginPage/>}/>
                     <Route path="/join" element={<SignUpPage/>}/>
                     <Route path="/hisorypage" element={<UpdateHistoryPage/>}/>
+                    <Route path="/profile/mypage" element={<ProfilePage/>}/>
                     <Route element={<Sidebar/>}>
                         <Route path="/message" element={<MessagePage/>}/>
                         <Route path="/message/mysend" element={<MessageSendPage/>}/>

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import '../style/LoginPage.scss'
 import axios from '../../node_modules/axios/index';
 import { useSelector, useDispatch } from 'react-redux';
-import { success } from '../slices/loginState'
+import { success,adminsuccess } from '../slices/loginState'
 
 const LoginPage = () => {
     const [userId, setUserId] = useState('');
@@ -11,6 +11,7 @@ const LoginPage = () => {
     const navigate = useNavigate();
     const apiUrl = process.env.REACT_APP_API_URL;
     const isLoggedIn = useSelector((state) => state.loginState.user);
+    const isRole = useSelector((state) => state.loginState.role);
     const dispatch = useDispatch();
     const joinPage=()=>{
         navigate('/join')
@@ -29,8 +30,16 @@ const LoginPage = () => {
 
 
             if (response.status===200){
-                dispatch(success())
-                console.log(response.data.authorities)
+                console.log("권한",response.data.authorities)
+               if(response.data.authorities!==null){
+                if(response.data.authorities==="ROLE_USER"){
+                                    dispatch(success())
+                                  }
+                else if(response.data.authorities==="ROLE_ADMIN"){
+  
+                                    dispatch(adminsuccess())
+                                  }
+                                }
                 navigate('/')
 
             }
