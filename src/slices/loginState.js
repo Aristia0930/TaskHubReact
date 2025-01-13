@@ -2,7 +2,8 @@ import {createSlice} from '@reduxjs/toolkit'
 
 const initialState={
     user:false,
-    role:""
+    role:"",
+    image:0
 }
 
 const loginState=createSlice({
@@ -20,10 +21,13 @@ const loginState=createSlice({
             state.user=true
             state.role="admin"
         },
+        imagechagne:(state,action)=>{
+            state.image = action.payload;
+        }
 
     },
 })
 
 
-export const { success, fail,adminsuccess } = loginState.actions;
+export const { success, fail,adminsuccess,imagechagne } = loginState.actions;
 export default loginState.reducer;

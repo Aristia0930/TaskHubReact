@@ -2,20 +2,22 @@ import React, { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { success, fail,adminsuccess } from '../slices/loginState'
+import { success, fail,adminsuccess,imagechagne } from '../slices/loginState'
 import {Link} from 'react-router-dom';
 import axios from '../../node_modules/axios/index';
 import '../style/Head.scss'
 import Footer from './Footer'
 import Profile from './Profile';
-
+import { IMAGE_LIST } from "../variable/constants";
 
 const Head = () => {
     const apiUrl = process.env.REACT_APP_API_URL;
     const isLoggedIn = useSelector((state) => state.loginState.user);
     const isRole = useSelector((state) => state.loginState.role);
+    const isImgNum = useSelector((state) => state.loginState.image);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+      const imgList=IMAGE_LIST;
 
   useEffect(()=>{
     const check=async()=>{
@@ -31,6 +33,13 @@ const Head = () => {
                     dispatch(adminsuccess())
                   }
                 }
+                console.log("이미지",rs.data.imgId)
+                if(rs.data.imgId===null){
+                
+                  dispatch(imagechagne(0))
+                }else{
+                  dispatch(imagechagne(rs.data.imgId))
+                }
                 
                 console.log(rs.data.authorities)
                 
@@ -39,11 +48,14 @@ const Head = () => {
         catch(error){
             console.log(error)
             dispatch(fail())
-            // navigate('/')
+      
         }
     }
+
+ 
     check()
-  },[])
+
+  },[isLoggedIn])
 
   const handleLogin = () => {
     navigate('/login')
@@ -88,20 +100,16 @@ const messageButton=()=>{
         <nav className="nav">
           <ul className="nav-links">
             <li onClick={()=>{navigate("/")}}>Home</li>
-            {/* <li><Link to="/">Notices</Link></li> */}
+
             <li onClick={()=>{navigate("/hisorypage")}}>Update History</li>
             <li onClick={todoButton}>Todo</li>
             <li onClick={messageButton}>Message</li>
-            {/* <li><a href="/about">About</a></li>
-            <li><a href="/services">Services</a></li>
-            <li><a href="/contact">Contact</a></li> */}
+
           </ul>
           <div className="auth-buttons">
             {isLoggedIn ? (
-              // isRole==="admin" ? (<button onClick={handleLogout} className="logout-button">어드민</button>) :
-              //   (<button onClick={handleLogout} className="logout-button">Logout</button>)
-                // <img src='/profile_40x40.png'/>
-                <Profile role={isRole} imageSrc="/profile_40x40.png" />
+
+                <Profile role={isRole} imageSrc={imgList[isImgNum]} />
 
             ) : (
               <button onClick={handleLogin} className="login-button">Login</button>

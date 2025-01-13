@@ -2,22 +2,28 @@ import React, { useEffect, useState } from "react";
 import "../style/ProfilePage.scss";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { use } from "react";
+import { API_URL, IMAGE_LIST } from "../variable/constants";
+
 import axios from "../../node_modules/axios/index";
 
 const ProfilePage = () => {
-  const apiUrl = process.env.REACT_APP_API_URL;
+
   const isLoggedIn = useSelector((state) => state.loginState.user);
   const navigate = useNavigate();
-  const [myname, setMyname] = useState("홍길동");
-  const [email, setEmail] = useState("example@example.com");
-  const [point, setPoint] = useState(1000);
+  const [myname, setMyname] = useState();
+  const [email, setEmail] = useState("");
+  const [point, setPoint] = useState();
   const [editingName, setEditingName] = useState(false);
   const [newName, setNewName] = useState("");
   const [emailVerification, setEmailVerification] = useState(email);
   const [verificationCode, setVerificationCode] = useState("");
   const [verificationInput, setVerificationInput] = useState("");
   const [showPopup, setShowPopup] = useState(false);
+  const [imagePopup, setImagePopup] = useState(false);
+  const [imgNum,setImgNum]=useState()
+  const [newimgNum,setNewImgNum]=useState()
+  const [selectedImageIndex, setSelectedImageIndex] = useState(null);
+  const imgList=IMAGE_LIST;
 
   useEffect(() => {
 
@@ -25,10 +31,18 @@ const ProfilePage = () => {
     //이름.이메일,이미지번호,포인트 받아오기
    const userInfo=async()=>{
     try{
-        const rs=await axios.get(`${apiUrl}/profile/mydata`,{ withCredentials: true })
+        const rs=await axios.get(`${API_URL}/profile/mydata`,{ withCredentials: true })
         if (rs.status===200){
-            console.log("프로필")
-            console.log(rs.data)
+            setEmail(rs.data.email)
+            setEmailVerification(email)
+            setMyname(rs.data.name)
+            setPoint(rs.data.point)
+            if(rs.data.imgId===null){
+              setImgNum(0)
+            }else{
+              setImgNum(rs.data.imgId)
+            }
+            
         }
     }
     catch(error){
@@ -80,18 +94,34 @@ const ProfilePage = () => {
     }
   };
 
+  //이미지 수정 팝업
+  const imagePopupShow=()=>{
+    setImagePopup(true)
+  }
+
+  const handleImageClick = (index) => {
+    setNewImgNum(index);
+    setSelectedImageIndex(index);
+  };
+
+  const imagePopupShot=()=>{
+    setImagePopup(false)
+    setImgNum(newimgNum)
+  }
+
+
   return (
     <div className="profile-page">
       <h1>마이페이지</h1>
       <div className="profile-container">
         <div className="profile-image-section">
           <img
-            src="/profile_40x40.png"
+            src={imgList[imgNum]}
             alt="프로필"
             className="profile-image"
           />
         </div>
-        <button className="modify-button">프로필 이미지 수정</button>
+        <button className="modify-button" onClick={imagePopupShow}>프로필 이미지 수정</button>
         <div className="profile-info">
           {/* 이름 수정 */}
           <div className="info-item">
@@ -168,6 +198,39 @@ const ProfilePage = () => {
             </div>
           </div>
         </div>
+      )}
+      {/*이미지 수저 팝업 */}
+      {imagePopup && (
+        <div className="popup-overlay">
+          <div className="popup-content">
+          <div className="image-grid">
+        {imgList.map((imageUrl, index) => (
+          <div key={index}       className={`image-item ${selectedImageIndex === index ? 'selected' : ''}`} onClick={()=>handleImageClick(index)}>
+            <img 
+              src={imageUrl} 
+              alt={`Image ${index + 1}`} 
+            />
+          </div>
+        ))}
+      </div>
+            
+          <div className="popup-buttons">
+              <button
+                className="verify-button"
+                onClick={imagePopupShot}
+              >
+                선택완료
+              </button>
+              <button
+                className="cancel-button"
+                onClick={()=>setImagePopup(false)}
+              >
+                취소
+              </button>
+            </div>
+          </div>
+          </div>
+   
       )}
     </div>
   );
