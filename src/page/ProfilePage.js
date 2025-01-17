@@ -16,14 +16,14 @@ const ProfilePage = () => {
   const [editingName, setEditingName] = useState(false);
   const [newName, setNewName] = useState("");
   const [emailVerification, setEmailVerification] = useState(email);
-  const [verificationCode, setVerificationCode] = useState("");
   const [verificationInput, setVerificationInput] = useState("");
   const [showPopup, setShowPopup] = useState(false);
   const [imagePopup, setImagePopup] = useState(false);
-  const [imgNum,setImgNum]=useState()
-  const [newimgNum,setNewImgNum]=useState()
+  const [imgNum,setImgNum]=useState();
+  const [newimgNum,setNewImgNum]=useState();
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
   const imgList=IMAGE_LIST;
+  const [emailCheck,setEmailCheck]=useState(false);
 
   useEffect(() => {
 
@@ -34,7 +34,8 @@ const ProfilePage = () => {
         const rs=await axios.get(`${API_URL}/profile/mydata`,{ withCredentials: true })
         if (rs.status===200){
             setEmail(rs.data.email)
-            setEmailVerification(email)
+            setEmailVerification(rs.data.email)
+            setEmailCheck(true)
             setMyname(rs.data.name)
             setPoint(rs.data.point)
             if(rs.data.imgId===null){
@@ -59,6 +60,11 @@ const ProfilePage = () => {
 
   }, [isLoggedIn, navigate]);
 
+  useEffect(()=>{
+    setEmailCheck(false);
+
+  },[emailVerification])
+
 
 
 
@@ -74,20 +80,39 @@ const ProfilePage = () => {
     setEditingName(false);
   };
 
+
+
   const sendVerificationEmail = () => {
     if (emailVerification.trim() === "") return alert("이메일을 입력해주세요.");
-    // 여기에 이메일 인증 API 호출 로직 추가
-    alert("인증 메일을 보냈습니다!");
-    setVerificationCode("123456"); // 예시용 인증 코드
+
+    const rs = axios.get(
+      `${API_URL}/profile/maile/check`,
+      {
+        params: { email: emailVerification }, // query string으로 전달
+        withCredentials: true, // 쿠키 인증 활성화
+      }
+    );
+
+    if(rs.status===200){
+      console.log(rs)
+      alert("인증 메일을 보냈습니다 확인해주세요")
+    }
     setShowPopup(true); // 팝업 표시
   };
 
-  const handleEmailVerification = () => {
-    if (verificationInput === verificationCode) {
+  const handleEmailVerification = async() => {
+    const rs = await axios.get(
+      `${API_URL}/profile/maile/code`,
+      {
+        params: { email: emailVerification }, // query string으로 전달
+        withCredentials: true, // 쿠키 인증 활성화
+      }
+    );
+    if (verificationInput === rs.data) {
       setEmail(emailVerification);
       alert("이메일 인증이 완료되었습니다!");
       setVerificationInput("");
-      setEmailVerification("");
+      setEmailCheck(true);
       setShowPopup(false); // 팝업 닫기
     } else {
       alert("인증 코드가 올바르지 않습니다.");
@@ -107,6 +132,41 @@ const ProfilePage = () => {
   const imagePopupShot=()=>{
     setImagePopup(false)
     setImgNum(newimgNum)
+  }
+
+  //회원정보 수정
+  const profileModfiy=async()=>{
+    if(!emailCheck){
+      return alert("이메일을 인증해주세요")
+    }
+
+    const formData = new FormData();
+    formData.append("email",email)
+    formData.append("imgId",imgNum)
+    formData.append("name",myname)
+    try{
+    const rs=await axios.put(
+      `${API_URL}/profile/update`,
+      formData,
+      { 
+        withCredentials: true, // 쿠키 인증 활성화
+      }
+
+
+    );
+    if(rs.status===200){
+      alert("수정완료")
+    }
+  }
+  catch(error){
+    console.log("프로필수정오류",error)
+    alert("수정 실패 오류 발생")
+
+  }
+  
+
+    
+
   }
 
 
@@ -167,7 +227,7 @@ const ProfilePage = () => {
           </div>
           {/* 회원 탈퇴 */}
           <button className="delete-button">회원 탈퇴</button>
-          <button className="my-modify-button">수정 하기</button>
+          <button className="my-modify-button" onClick={profileModfiy}>수정 하기</button>
         </div>
       </div>
 
