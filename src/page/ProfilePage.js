@@ -23,7 +23,7 @@ const ProfilePage = () => {
   const [newimgNum,setNewImgNum]=useState();
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
   const imgList=IMAGE_LIST;
-  const [emailCheck,setEmailCheck]=useState(false);
+ 
 
   useEffect(() => {
 
@@ -35,7 +35,7 @@ const ProfilePage = () => {
         if (rs.status===200){
             setEmail(rs.data.email)
             setEmailVerification(rs.data.email)
-            setEmailCheck(true)
+      
             setMyname(rs.data.name)
             setPoint(rs.data.point)
             if(rs.data.imgId===null){
@@ -60,10 +60,7 @@ const ProfilePage = () => {
 
   }, [isLoggedIn, navigate]);
 
-  useEffect(()=>{
-    setEmailCheck(false);
 
-  },[emailVerification])
 
 
 
@@ -112,7 +109,6 @@ const ProfilePage = () => {
       setEmail(emailVerification);
       alert("이메일 인증이 완료되었습니다!");
       setVerificationInput("");
-      setEmailCheck(true);
       setShowPopup(false); // 팝업 닫기
     } else {
       alert("인증 코드가 올바르지 않습니다.");
@@ -136,18 +132,19 @@ const ProfilePage = () => {
 
   //회원정보 수정
   const profileModfiy=async()=>{
-    if(!emailCheck){
+    if(emailVerification!=email){
       return alert("이메일을 인증해주세요")
     }
 
-    const formData = new FormData();
-    formData.append("email",email)
-    formData.append("imgId",imgNum)
-    formData.append("name",myname)
+    const data = {
+      email,
+      imgId: imgNum,
+      name: myname,
+    };
     try{
     const rs=await axios.put(
       `${API_URL}/profile/update`,
-      formData,
+      data,
       { 
         withCredentials: true, // 쿠키 인증 활성화
       }
