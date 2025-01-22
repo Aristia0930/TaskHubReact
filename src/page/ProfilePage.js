@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "../style/ProfilePage.scss";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import {fail} from '../slices/loginState'
+
 import { API_URL, IMAGE_LIST } from "../variable/constants";
 
 import axios from "../../node_modules/axios/index";
@@ -23,7 +25,7 @@ const ProfilePage = () => {
   const [newimgNum,setNewImgNum]=useState();
   const [selectedImageIndex, setSelectedImageIndex] = useState(null);
   const imgList=IMAGE_LIST;
- 
+  const dispatch = useDispatch();
 
   useEffect(() => {
 
@@ -62,10 +64,6 @@ const ProfilePage = () => {
 
 
 
-
-
-
-
   const handleNameChange = () => {
     setEditingName(true);
     setNewName(myname);
@@ -81,7 +79,7 @@ const ProfilePage = () => {
 
   const sendVerificationEmail = () => {
     if (emailVerification.trim() === "") return alert("이메일을 입력해주세요.");
-
+    try{
     const rs = axios.get(
       `${API_URL}/profile/maile/check`,
       {
@@ -94,26 +92,41 @@ const ProfilePage = () => {
       console.log(rs)
       alert("인증 메일을 보냈습니다 확인해주세요")
     }
+    else if(rs.status===500){
+      alert("이메일 전송 오류 다시 한번 확인해주세요요")
+    }}
+    catch(error){
+      console.error("이메일 인증 서버 오류 발생:", error);
+    }
+      
+    
     setShowPopup(true); // 팝업 표시
   };
 
-  const handleEmailVerification = async() => {
-    const rs = await axios.get(
-      `${API_URL}/profile/maile/code`,
-      {
-        params: { email: emailVerification }, // query string으로 전달
-        withCredentials: true, // 쿠키 인증 활성화
+  const handleEmailVerification = async () => {
+    try {
+      const rs = await axios.get(
+        `${API_URL}/profile/maile/code`,
+        {
+          params: { email: emailVerification },
+          withCredentials: true,
+        }
+      );
+      
+      if (verificationInput === rs.data) {
+        setEmail(emailVerification);
+        alert("이메일 인증이 완료되었습니다!");
+        setVerificationInput("");
+        setShowPopup(false);
+      } else {
+        alert("인증 코드가 올바르지 않습니다.");
       }
-    );
-    if (verificationInput === rs.data) {
-      setEmail(emailVerification);
-      alert("이메일 인증이 완료되었습니다!");
-      setVerificationInput("");
-      setShowPopup(false); // 팝업 닫기
-    } else {
-      alert("인증 코드가 올바르지 않습니다.");
+    } catch (error) {
+      console.error("이메일 인증 중 오류 발생:", error);
+      alert("이메일 인증 중 오류가 발생했습니다. 다시 시도해 주세요.");
     }
   };
+  
 
   //이미지 수정 팝업
   const imagePopupShow=()=>{
@@ -153,6 +166,7 @@ const ProfilePage = () => {
     );
     if(rs.status===200){
       alert("수정완료")
+      navigate("/")
     }
   }
   catch(error){
@@ -161,9 +175,31 @@ const ProfilePage = () => {
 
   }
   
-
-    
-
+  }
+  //유저 탈퇴
+  const deleteUser=async()=>{
+    try{
+      const rs=await axios.delete(
+        `${API_URL}/profile/user/delete`,
+        { 
+          withCredentials: true, // 쿠키 인증 활성화
+        }
+  
+  
+      );
+      if(rs.status===200){
+       
+        alert("회원탈퇴 완료")
+        const logout=await axios.get(`${API_URL}/logout`,{ withCredentials: true })
+        dispatch(fail());  
+        navigate("/");
+      }
+    }
+    catch(error){
+      console.log("회원탈퇴 오류",error)
+      alert("회원탈퇴 실패")
+  
+    }
   }
 
 
@@ -223,7 +259,7 @@ const ProfilePage = () => {
             <span className="value">{point}</span>
           </div>
           {/* 회원 탈퇴 */}
-          <button className="delete-button">회원 탈퇴</button>
+          <button className="delete-button" onClick={deleteUser}>회원 탈퇴</button>
           <button className="my-modify-button" onClick={profileModfiy}>수정 하기</button>
         </div>
       </div>

@@ -29,7 +29,7 @@ const SignUpPage = () => {
         
  
     } catch(error){
-        if (error.response.data.custom_code===12){
+        if (error.status===409){
             alert("아이디 중복입니다 다시 작성해주세요")
             
         }
