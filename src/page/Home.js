@@ -38,6 +38,7 @@ const Home = () => {
         }
         catch(error){
             dispatch(fail())
+            console.log("로그아웃 넘어옴옴")
             console.log(error)
         }
     }
@@ -54,9 +55,9 @@ const Home = () => {
         }
     }
 
-    // useEffect(()=>{
-    //     check()
-    // },[])
+    useEffect(()=>{
+        check()
+    },)
     return (
         <div className='home'>
 

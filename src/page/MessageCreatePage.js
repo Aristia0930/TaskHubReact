@@ -30,7 +30,7 @@ function MessageCreatePage() {
             alert('메시지가 성공적으로 전송되었습니다!');
           
         } catch (error) {
-          if (error.status===999){
+          if (error.status===500){
             alert("상대방 ID를 확인해주세요 ")
           }
 
