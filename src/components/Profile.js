@@ -35,6 +35,10 @@ const Profile = ({role,imageSrc}) => {
     navigate("/profile/mypage")
   }
 
+  const noticeButton=()=>{
+    navigate("/notice/write")
+  }
+
 
 
     return (
@@ -50,7 +54,7 @@ const Profile = ({role,imageSrc}) => {
                     <ul>
                         <li onClick={profileModify}>프로필 수정</li>
                         <li onClick={handleLogout}>로그아웃</li>
-                        {role==="admin" && <li >공지작성</li>}
+                        {role==="admin" && <li onClick={noticeButton}>공지작성</li>}
                     </ul>
                 </div>
             )}

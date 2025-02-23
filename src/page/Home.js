@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import {Link} from 'react-router-dom';
 import axios from '../../node_modules/axios/index';
 import { useDispatch, useSelector } from 'react-redux';
-import { success, fail } from '../slices/loginState'
+import { success, fail,adminsuccess } from '../slices/loginState'
 import { useNavigate } from 'react-router-dom';
 import '../style/Home.scss'
 import MainBanner from '../components/MainBanner';
@@ -29,9 +29,12 @@ const Home = () => {
             const rs=await axios.get(`${apiUrl}/check/1`,{ withCredentials: true })
 
             if (rs.status===200){
-                if(rs.data.authorities!==null){
+                  if(rs.data.authorities==="ROLE_USER"){
                     dispatch(success())
-                }
+                  }
+                  else if(rs.data.authorities==="ROLE_ADMIN"){
+                    dispatch(adminsuccess())
+                  }
                 
                 console.log(rs.data.authorities)
             }

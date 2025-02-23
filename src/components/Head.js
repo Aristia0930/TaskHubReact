@@ -55,7 +55,7 @@ const Head = () => {
  
     check()
 
-  },[isLoggedIn])
+  },[isLoggedIn,isRole])
 
   const handleLogin = () => {
     navigate('/login')
@@ -100,7 +100,7 @@ const messageButton=()=>{
         <nav className="nav">
           <ul className="nav-links">
             <li onClick={()=>{navigate("/")}}>Home</li>
-
+            <li onClick={()=>{navigate("/Notice")}}>Notice</li>
             <li onClick={()=>{navigate("/hisorypage")}}>Update History</li>
             <li onClick={todoButton}>Todo</li>
             <li onClick={messageButton}>Message</li>
