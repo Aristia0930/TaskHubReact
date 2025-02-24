@@ -14,7 +14,7 @@ import UpdateHistoryPage from '../page/UpdateHistoryPage';
 import ProfilePage from '../page/ProfilePage';
 import Notice from '../page/Notice';
 import NoticeWrite from '../page/NoticWrite';
-
+import NoticeViewPage from '../page/NoticeViewPage';
 const Path = () => {
     // const data={
     //     velopert:{
@@ -38,6 +38,7 @@ const Path = () => {
                     <Route path="/profile/mypage" element={<ProfilePage/>}/>
                     <Route path="/notice" element={<Notice/>}/>
                     <Route path="/notice/write" element={<NoticeWrite/>}/>
+                    <Route path="/notice/view/:id" element={<NoticeViewPage/>}/>
                     <Route element={<Sidebar/>}>
                         <Route path="/message" element={<MessagePage/>}/>
                         <Route path="/message/mysend" element={<MessageSendPage/>}/>

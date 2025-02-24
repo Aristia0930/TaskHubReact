@@ -27,9 +27,9 @@
   &__header-item {
     text-align: center;
     
-    &.notice-board__title-col {
-      text-align: left;
-    }
+    // &.notice-board__title-col {
+    //   text-align: left;
+    // }
   }
 
   &__row {
@@ -48,9 +48,9 @@
   &__cell {
     text-align: center;
     
-    &.notice-board__title-col {
-      text-align: left;
-    }
+    // &.notice-board__title-col {
+    //   text-align: left;
+    // }
   }
 
   &__number,
@@ -102,4 +102,8 @@
       }
     }
   }
+}
+.link_line{
+  text-decoration: none;
+  color: #000000;
 }

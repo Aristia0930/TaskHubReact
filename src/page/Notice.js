@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import "../style/Notice.scss";
 import axios from '../../node_modules/axios/index';
-
+import { Link } from 'react-router-dom';
 const Notice = () => {
     const apiUrl = process.env.REACT_APP_API_URL;
     const [currentPage, setCurrentPage] = useState(1);
@@ -19,6 +19,8 @@ const Notice = () => {
         title: item.title,
         author: "관리자",
         date: convertToKST(item.created_date),
+        content : item.content,
+        num:item.num
       }));
 
     //게시글 가져오기
@@ -66,13 +68,24 @@ const Notice = () => {
   
           {/* 게시글 목록 */}
           {getCurrentItems().map((notice) => (
+            
+              <Link 
+              to={`/notice/view/${notice.num}`} 
+              key={notice.id}
+              state={{notice}} 
+              className="link_line"
+              
+            >
             <div key={notice.id} className="notice-board__row">
               <div className="notice-board__cell notice-board__number">{notice.id}</div>
               <div className="notice-board__cell notice-board__title-col">{notice.title}</div>
               <div className="notice-board__cell notice-board__author">{notice.author}</div>
               <div className="notice-board__cell notice-board__date">{notice.date}</div>
             </div>
-          ))}
+            </Link>
+          ))
+          
+          }
         </div>
   
         {/* 페이지네이션 */}
